@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-app-stable
+  name: web-app-latest
 spec:
   replicas: 5
   selector:
@@ -32,3 +32,25 @@ spec:
       protocol: TCP
   selector:
     app: web-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-canary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app
+      version: canary
+  template:
+    metadata:
+      labels:
+        app: web-app
+        version: canary
+    spec:
+      containers:
+      - name: web-app-container
+        image: eywrld839/webapp:canary
+        ports:
+        - containerPort: 5000
