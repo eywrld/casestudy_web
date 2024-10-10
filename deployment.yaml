@@ -7,12 +7,12 @@ spec:
   selector:
     matchLabels:
       app: web-app
-      version: stable
+      version: latest
   template:
     metadata:
       labels:
         app: web-app
-        version: stable
+        version: latest
     spec:
       containers:
       - name: web-app-container
